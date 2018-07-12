@@ -1,0 +1,103 @@
+﻿<Window x:Class="LocaManager.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LocaManager.View"
+        xmlns:viewModel="clr-namespace:LocaManager.ViewModel"
+        mc:Ignorable="d"
+        Title="Loca Manager" Height="Auto" Width="800" MinWidth="800" MinHeight="535">
+
+    <Window.DataContext>
+        <viewModel:MainVM/>
+    </Window.DataContext>
+
+    <Grid>
+        <DockPanel>
+            <Grid VerticalAlignment="Top" Height="80" DockPanel.Dock="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="560"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border BorderBrush="Black" BorderThickness="1" VerticalAlignment="Top" MinHeight="80" Grid.ColumnSpan="2">
+                    <StackPanel Orientation="Horizontal" Grid.Column="0">
+                        <GroupBox Header="Search a term" Height="79" Width="215">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Height="23" TextWrapping="NoWrap" Text="{Binding SearchText}" Width="120" Margin="10,0,0,0"/>
+                                <Button Content="Search" Width="60" Margin="10,0,0,0" Command="{Binding SearchCommand, Mode=OneWay}"/>
+                            </StackPanel>
+                        </GroupBox>
+                        <Button Content="Load data" Width="75" Margin="10,0,0,0" Command="{Binding LoadDataCommand, Mode=OneWay}"/>
+                        <Button Content="New loca" Width="75" Margin="10,0,0,0" Command="{Binding NewLocaCommand, Mode=OneWay}"/>
+                        <Button Content="From LevelID" Width="75" Margin="10,0,0,0" Command="{Binding FromLevelIdCommand, Mode=OneWay}"/>
+                        <Button Content="Settings" Width="75" Margin="10,0,0,0" Command="{Binding SettingsCommand, Mode=OneWay}"/>
+                    </StackPanel>
+                </Border>
+                <GroupBox Header="Data" Height="79" MinWidth="200" Margin="10,0,10,0" Grid.Column="1">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Number of terms:" Padding="5,0" FontSize="11"/>
+                            <Label Content="{Binding NumberOfTerms, Converter={StaticResource IntToStringConv}}" Padding="5,0" FontSize="11"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Number of viewable terms:" Padding="5,0" FontSize="11"/>
+                            <Label Content="{Binding NumberOfViewTerms, Converter={StaticResource IntToStringConv}}" Padding="5,0" FontSize="11"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Number of new terms:" Padding="5,0" FontSize="11"/>
+                            <Label Content="{Binding NumberOfNewTerms, Converter={StaticResource IntToStringConv}}" Padding="5,0" FontSize="11"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Number of edited terms:" Padding="5,0" FontSize="11"/>
+                            <Label Content="{Binding NumberOfEditedTerms, Converter={StaticResource IntToStringConv}}" Padding="5,0" FontSize="11"/>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ListView MinWidth="345" MinHeight="340" ItemsSource="{Binding Locas}" SelectedIndex="{Binding SelectedIndex}" Grid.Column="0">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="#" Width="50" DisplayMemberBinding="{Binding Index}"/>
+                            <GridViewColumn Header="Key" Width="Auto" DisplayMemberBinding="{Binding Term}"/>
+                            <GridViewColumn Header="Description" Width="100" DisplayMemberBinding="{Binding Description}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Border BorderBrush="Black" BorderThickness="1" MinWidth="332" MinHeight="340" Grid.Column="1">
+                    <StackPanel Orientation="Vertical">
+                        <GroupBox Header="Key" Height="50">
+                            <TextBox MinHeight="23" TextWrapping="Wrap" Text="{Binding SelectedLoca.Term}" VerticalAlignment="Center"/>
+                        </GroupBox>
+                        <GroupBox Header="Description" Height="Auto">
+                            <TextBox MinHeight="23" TextWrapping="Wrap" Text="{Binding SelectedLoca.Description}" VerticalAlignment="Center"/>
+                        </GroupBox>
+                        <GroupBox Header="English" Height="Auto">
+                            <TextBox MinHeight="23" TextWrapping="Wrap" Text="{Binding SelectedLoca.English}" VerticalAlignment="Center"/>
+                        </GroupBox>
+                        <GroupBox Header="French" Height="Auto">
+                            <TextBox MinHeight="23" TextWrapping="Wrap" Text="{Binding SelectedLoca.French}" VerticalAlignment="Center"/>
+                        </GroupBox>
+                        <GroupBox Header="Chinese" Height="Auto">
+                            <TextBox MinHeight="23" TextWrapping="Wrap" Text="{Binding SelectedLoca.Chinese}" VerticalAlignment="Center"/>
+                        </GroupBox>
+                        <GroupBox Header="Portuguese" Height="Auto">
+                            <TextBox MinHeight="23" TextWrapping="Wrap" Text="{Binding SelectedLoca.Portuguese}" VerticalAlignment="Center"/>
+                        </GroupBox>
+                        <GroupBox Header="Russian" Height="Auto">
+                            <TextBox MinHeight="23" TextWrapping="Wrap" Text="{Binding SelectedLoca.Russian}" VerticalAlignment="Center"/>
+                        </GroupBox>
+                        <GroupBox Header="Spanish" Height="Auto">
+                            <TextBox MinHeight="23" TextWrapping="Wrap" Text="{Binding SelectedLoca.Spanish}" VerticalAlignment="Center"/>
+                        </GroupBox>
+                        <Button Height="40" Margin="20,0" Content="Save"  Command="{Binding SaveEditCommand, Mode=OneWay}"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</Window>
