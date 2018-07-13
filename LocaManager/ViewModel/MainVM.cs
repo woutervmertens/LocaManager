@@ -179,6 +179,9 @@ namespace LocaManager.ViewModel
 
         public void Init()
         {
+            //Save Settings
+            Savesystem.SaveSettings();
+            //Check if first load
             if (!isFirstLoad) return;
             //Load
             Savesystem.LoadLoca();

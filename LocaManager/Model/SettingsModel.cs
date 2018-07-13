@@ -249,6 +249,7 @@ namespace LocaManager.Model
 
         public void Save(string filename)
         {
+            (new FileInfo(filename)).Directory.Create();
             using (StreamWriter sw = new StreamWriter(filename))
             {
                 XmlSerializer xmls = new XmlSerializer(typeof(SettingsModel));

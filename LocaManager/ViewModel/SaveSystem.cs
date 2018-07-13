@@ -14,8 +14,8 @@ namespace LocaManager.Model
     public class SaveSystem
     {
         public const string UserSettingsFilename = "settings.xml";
-        public string _DefaultSettingspath = Assembly.GetEntryAssembly().Location + "\\Settings\\" + UserSettingsFilename;
-        public string _UserSettingsPath = Assembly.GetEntryAssembly().Location + "\\Settings\\UserSettings\\" + UserSettingsFilename;
+        public string _DefaultSettingspath = Environment.CurrentDirectory + "\\Settings\\" + UserSettingsFilename;
+        public string _UserSettingsPath = Environment.CurrentDirectory + "\\Settings\\UserSettings\\" + UserSettingsFilename;
 
         private List<String> locaTextLines;
 
@@ -26,13 +26,12 @@ namespace LocaManager.Model
 
         public void LoadSettings()
         {
+            MainVM.Settings = new SettingsModel();
             //if user settings exist
             if (File.Exists(_UserSettingsPath))
                 MainVM.Settings = MainVM.Settings.Load(_UserSettingsPath);
             else if (File.Exists(_DefaultSettingspath))
                 MainVM.Settings = MainVM.Settings.Load(_DefaultSettingspath);
-            else
-                MainVM.Settings = new SettingsModel();
         }
 
         public void SaveLoca(List<LocaModel> locas)
@@ -120,7 +119,7 @@ namespace LocaManager.Model
         }
 
         /// <summary>
-        /// Takes line id and fills and returns a LocaModel
+        /// Takes line id and fills + returns a LocaModel
         /// </summary>
         /// <param name="startId">Id where loca starts</param>
         /// <returns></returns>
@@ -139,6 +138,9 @@ namespace LocaManager.Model
             return lm;
         }
 
+        /// <summary>
+        /// Puts every element on a single line
+        /// </summary>
         private void RemoveDoubleLinesFromList()
         {
             int c = locaTextLines.Count - 1;
@@ -194,6 +196,11 @@ namespace LocaManager.Model
 
         }
 
+        /// <summary>
+        /// Decode the unicode literals
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         private string Decode(string str)
         {
             if(str.Contains(@"\u") || str.Contains(@"\x"))
@@ -205,6 +212,11 @@ namespace LocaManager.Model
             return str;
         }
 
+        /// <summary>
+        /// goes through every letter and decodes
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         private string DecodeWhile(string str)
         {
             string result = "";
