@@ -7,7 +7,7 @@
         xmlns:viewModel="clr-namespace:LocaManager.ViewModel"
         xmlns:helpers="clr-namespace:LocaManager"
         mc:Ignorable="d"
-        Title="Loca Manager" Height="Auto" Width="800" MinWidth="800" MinHeight="535">
+        Title="Loca Manager" Height="Auto" Width="800" MinWidth="800" MinHeight="635">
 
     <Window.DataContext>
         <viewModel:MainVM/>
@@ -73,33 +73,36 @@
                     </ListView.View>
                 </ListView>
                 <Border BorderBrush="Black" BorderThickness="1" MinWidth="332" MinHeight="340" Grid.Column="1">
-                    <StackPanel Orientation="Vertical">
-                        <GroupBox Header="Key" Height="50">
-                            <TextBox MinHeight="23" TextWrapping="Wrap" Text="{Binding SelectedLoca.Term}" VerticalAlignment="Center"/>
-                        </GroupBox>
-                        <GroupBox Header="Description" Height="Auto">
-                            <TextBox MinHeight="23" TextWrapping="Wrap" Text="{Binding SelectedLoca.Description}" VerticalAlignment="Center"/>
-                        </GroupBox>
-                        <GroupBox Header="English" Height="Auto">
-                            <TextBox MinHeight="23" TextWrapping="Wrap" Text="{Binding SelectedLoca.English}" VerticalAlignment="Center"/>
-                        </GroupBox>
-                        <GroupBox Header="French" Height="Auto">
-                            <TextBox MinHeight="23" TextWrapping="Wrap" Text="{Binding SelectedLoca.French}" VerticalAlignment="Center"/>
-                        </GroupBox>
-                        <GroupBox Header="Chinese" Height="Auto">
-                            <TextBox MinHeight="23" TextWrapping="Wrap" Text="{Binding SelectedLoca.Chinese}" VerticalAlignment="Center"/>
-                        </GroupBox>
-                        <GroupBox Header="Portuguese" Height="Auto">
-                            <TextBox MinHeight="23" TextWrapping="Wrap" Text="{Binding SelectedLoca.Portuguese}" VerticalAlignment="Center"/>
-                        </GroupBox>
-                        <GroupBox Header="Russian" Height="Auto">
-                            <TextBox MinHeight="23" TextWrapping="Wrap" Text="{Binding SelectedLoca.Russian}" VerticalAlignment="Center"/>
-                        </GroupBox>
-                        <GroupBox Header="Spanish" Height="Auto">
-                            <TextBox MinHeight="23" TextWrapping="Wrap" Text="{Binding SelectedLoca.Spanish}" VerticalAlignment="Center"/>
-                        </GroupBox>
-                        <Button Height="40" Margin="20,0" Content="Save"  Command="{Binding SaveEditCommand, Mode=OneWay}"/>
-                    </StackPanel>
+                    <Grid>
+                        <StackPanel Orientation="Vertical">
+                            <GroupBox Header="Key" Height="50">
+                                <TextBox MinHeight="23" TextWrapping="Wrap" Text="{Binding SelectedLoca.Term}" VerticalAlignment="Center"/>
+                            </GroupBox>
+                            <GroupBox Header="Description" Height="Auto">
+                                <TextBox MinHeight="23" TextWrapping="Wrap" Text="{Binding SelectedLoca.Description}" VerticalAlignment="Center"/>
+                            </GroupBox>
+                            <GroupBox Header="English" Height="Auto">
+                                <TextBox MinHeight="23" TextWrapping="Wrap" Text="{Binding SelectedLoca.English}" VerticalAlignment="Center"/>
+                            </GroupBox>
+                            <GroupBox Header="French" Height="Auto">
+                                <TextBox MinHeight="23" TextWrapping="Wrap" Text="{Binding SelectedLoca.French}" VerticalAlignment="Center"/>
+                            </GroupBox>
+                            <GroupBox Header="Chinese" Height="Auto">
+                                <TextBox MinHeight="23" TextWrapping="Wrap" Text="{Binding SelectedLoca.Chinese}" VerticalAlignment="Center"/>
+                            </GroupBox>
+                            <GroupBox Header="Portuguese" Height="Auto">
+                                <TextBox MinHeight="23" TextWrapping="Wrap" Text="{Binding SelectedLoca.Portuguese}" VerticalAlignment="Center"/>
+                            </GroupBox>
+                            <GroupBox Header="Russian" Height="Auto">
+                                <TextBox MinHeight="23" TextWrapping="Wrap" Text="{Binding SelectedLoca.Russian}" VerticalAlignment="Center"/>
+                            </GroupBox>
+                            <GroupBox Header="Spanish" Height="Auto">
+                                <TextBox MinHeight="23" TextWrapping="Wrap" Text="{Binding SelectedLoca.Spanish}" VerticalAlignment="Center"/>
+                            </GroupBox>
+                            <Button Height="40" Margin="20,5" Content="Save edit"  Command="{Binding SaveEditCommand, Mode=OneWay}"/>
+                        </StackPanel>
+                        <Button Height="40" Margin="20,20" Content="Save"  Command="{Binding SaveCommand, Mode=OneWay}" VerticalAlignment="Bottom"/>
+                    </Grid>
                 </Border>
             </Grid>
         </DockPanel>

@@ -169,6 +169,12 @@ namespace LocaManager.ViewModel
         {
             get { return saveEdit; }
         }
+        private ICommand save;
+        public ICommand SaveCommand
+        {
+            get { return save; }
+        }
+
 
         private bool isFirstLoad = true;
 
@@ -183,6 +189,7 @@ namespace LocaManager.ViewModel
             fromLevelId = new Command(OnClickFromLevelId);
             settings = new Command(OnClickSettings);
             saveEdit = new Command(OnClickSaveEdit);
+            save = new Command(OnClickSave);
 
             //Initialize SaveSystem and Load Settings
             Savesystem = new SaveSystem();
@@ -274,6 +281,11 @@ namespace LocaManager.ViewModel
                 NumberOfEditedTerms++;
             }
             Locas[SelectedIndex] = SelectedLoca;
+        }
+
+        public void OnClickSave()
+        {
+            Savesystem.SaveLoca(LocasBG);
         }
 
         //Find

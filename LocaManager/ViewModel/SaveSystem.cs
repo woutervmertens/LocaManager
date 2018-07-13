@@ -34,7 +34,7 @@ namespace LocaManager.Model
                 MainVM.Settings = MainVM.Settings.Load(_DefaultSettingspath);
         }
 
-        public void SaveLoca(List<LocaModel> locas)
+        public void SaveLoca(ObservableCollection<LocaModel> locas)
         {
             string toAddToTheEnd = "";
             int c = locas.Count;
@@ -82,6 +82,7 @@ namespace LocaManager.Model
         /// <param name="whatToAdd">Text to add</param>
         private void AddStringToEndOfLocaFile(string whatToAdd)
         {
+            if (whatToAdd.CompareTo("") == 0) return;
             int endIndex = locaTextLines.IndexOf(MainVM.Settings.LocaEnd);
             locaTextLines.Insert(endIndex, whatToAdd);
         }
@@ -154,7 +155,7 @@ namespace LocaManager.Model
                 {
                     while (!locaTextLines[i + offset].Contains("TermType:"))
                     {
-                        locaTextLines[i] += locaTextLines[i + offset];
+                        locaTextLines[i] += '\n' + locaTextLines[i + offset];
                         linesToRemove.Add(i + offset);
                         offset++;
                         if (i + offset >= locaTextLines.Count) break;
@@ -163,9 +164,9 @@ namespace LocaManager.Model
                 //Description
                 if (locaTextLines[i].StartsWith(MainVM.Settings.Desc))
                 {
-                    while (!locaTextLines[i + offset].Contains("Languages:"))
+                    while (!locaTextLines[i + offset].StartsWith("    Languages:"))
                     {
-                        locaTextLines[i] += locaTextLines[i + offset];
+                        locaTextLines[i] += '\n' + locaTextLines[i + offset];
                         linesToRemove.Add(i + offset);
                         offset++;
                         if (i + offset >= locaTextLines.Count) break;
@@ -178,7 +179,7 @@ namespace LocaManager.Model
                         && !locaTextLines[i + offset].Contains("Languages_Touch") 
                         && !locaTextLines[i + offset].Contains("Flags:"))
                     {
-                        locaTextLines[i] += locaTextLines[i + offset];
+                        locaTextLines[i] += '\n' + locaTextLines[i + offset];
                         linesToRemove.Add(i + offset);
                         offset++;
                         if (i + offset >= locaTextLines.Count) break;
@@ -209,6 +210,7 @@ namespace LocaManager.Model
                 sub = DecodeWhile(sub);
                 return sub;
             }
+            //str.Replace("\n", "\\n");
             return str;
         }
 
