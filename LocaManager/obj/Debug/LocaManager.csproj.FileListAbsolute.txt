@@ -18,4 +18,3 @@ C:\Users\woute\Source\repos\LocaManager\LocaManager\obj\Debug\LocaManager.csproj
 C:\Users\woute\Source\repos\LocaManager\LocaManager\obj\Debug\LocaManager.csproj.CoreCompileInputs.cache
 C:\Users\woute\Source\repos\LocaManager\LocaManager\obj\Debug\LocaManager.exe
 C:\Users\woute\Source\repos\LocaManager\LocaManager\obj\Debug\LocaManager.pdb
-C:\Users\woute\Source\repos\LocaManager\LocaManager\obj\Debug\LocaManager.csprojAssemblyReference.cache

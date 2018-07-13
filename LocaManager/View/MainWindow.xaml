@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LocaManager.View"
         xmlns:viewModel="clr-namespace:LocaManager.ViewModel"
+        xmlns:helpers="clr-namespace:LocaManager"
         mc:Ignorable="d"
         Title="Loca Manager" Height="Auto" Width="800" MinWidth="800" MinHeight="535">
 
@@ -59,7 +60,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <ListView MinWidth="345" MinHeight="340" ItemsSource="{Binding Locas}" SelectedIndex="{Binding SelectedIndex}" Grid.Column="0">
+                <ListView MinWidth="345" MinHeight="340" ItemsSource="{Binding Locas}" SelectedIndex="{Binding SelectedIndex}" helpers:ScrollToSelectedBehavior.SelectedValue="{Binding SelectedLoca}" Grid.Column="0">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="#" Width="50" DisplayMemberBinding="{Binding Index}"/>
