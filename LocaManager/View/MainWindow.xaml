@@ -24,7 +24,10 @@
                     <StackPanel Orientation="Horizontal" Grid.Column="0">
                         <GroupBox Header="Search a term" Height="79" Width="215">
                             <StackPanel Orientation="Horizontal">
-                                <TextBox Height="23" TextWrapping="NoWrap" Text="{Binding SearchText}" Width="120" Margin="10,0,0,0"/>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBox Height="23" TextWrapping="NoWrap" Text="{Binding SearchText}" Width="120" Margin="10,5,0,5"/>
+                                    <CheckBox Content="Full Search" Margin="20,0,20,0" IsChecked="{Binding IsFullSearch}"/>
+                                </StackPanel>
                                 <Button Content="Search" Width="60" Margin="10,0,0,0" Command="{Binding SearchCommand, Mode=OneWay}"/>
                             </StackPanel>
                         </GroupBox>

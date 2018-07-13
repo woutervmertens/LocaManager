@@ -100,6 +100,20 @@ namespace LocaManager.ViewModel
             }
         }
 
+        private bool _isFullSearch = false;
+        public bool IsFullSearch
+        {
+            get
+            {
+                return _isFullSearch;
+            }
+            set
+            {
+                _isFullSearch = value;
+                OnPropertyChanged("IsFullSearch");
+            }
+        }
+
         private ObservableCollection<LocaModel> _locas = new ObservableCollection<LocaModel>();
         public ObservableCollection<LocaModel> Locas
         {
@@ -220,8 +234,7 @@ namespace LocaManager.ViewModel
             {
                 SelectedIndex = 0;
                 Locas.Clear();
-                //IEnumerable<LocaModel> query = LocasBG.Where(i => i.Term.Contains(SearchText));
-                foreach (LocaModel lm in FindByTerm(LocasBG, SearchText))
+                foreach (LocaModel lm in Find(LocasBG, SearchText))
                 {
                     Locas.Add(lm);
                 }
@@ -255,7 +268,7 @@ namespace LocaManager.ViewModel
 
         public void OnClickSaveEdit()
         {
-            if(!SelectedLoca.IsEdited)
+            if(!SelectedLoca.IsEdited && !SelectedLoca.IsNew)
             {
                 SelectedLoca.IsEdited = true;
                 NumberOfEditedTerms++;
@@ -264,12 +277,22 @@ namespace LocaManager.ViewModel
         }
 
         //Find
-        IEnumerable<LocaModel> FindByTerm(IEnumerable<LocaModel> coll, String name)
+        IEnumerable<LocaModel> Find(IEnumerable<LocaModel> coll, String name)
         {
             foreach (LocaModel lm in coll)
             {
                 if (lm.Term.ToLowerInvariant().Contains(name.ToLowerInvariant()))
                     yield return lm;
+                if(IsFullSearch)
+                {
+                    if (lm.English.ToLowerInvariant().Contains(name.ToLowerInvariant())
+                        || lm.French.ToLowerInvariant().Contains(name.ToLowerInvariant())
+                        || lm.Portuguese.ToLowerInvariant().Contains(name.ToLowerInvariant())
+                        || lm.Spanish.ToLowerInvariant().Contains(name.ToLowerInvariant())
+                        || lm.Russian.ToLowerInvariant().Contains(name.ToLowerInvariant())
+                        || lm.Chinese.ToLowerInvariant().Contains(name.ToLowerInvariant()))
+                        yield return lm;
+                }
             }
         }
 
